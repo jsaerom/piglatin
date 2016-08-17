@@ -14,7 +14,7 @@ var secondChar = "";
 var thirdChar = "";
 var fourthChar = "";
 var displayText = "";
-
+var lastChar = "";
 function checkChar(character) {
   return character === firstChar;
 }
@@ -27,6 +27,9 @@ function checkChar3(character) {
 function checkChar4(character) {
   return character === fourthChar;
 }
+function checkCharLast(character) {
+  return character === lastChar;
+}
 
 var splitSentence = function(input){
   splitPhrase = input.split(" ");
@@ -37,8 +40,9 @@ var splitSentence = function(input){
     secondChar = words.charAt(1);
     thirdChar = words.charAt(2);
     fourthChar = words.charAt(3);
+    lastChar = words.charAt(words.length-1);
 
-    if (alphabetArray.some(checkChar)) {
+    if (alphabetArray.some(checkChar) && alphabetArray.some(checkCharLast)) {
       // this is where we will put functions to check for stuff now that we proved first letter is an alphabet character
       if (words.length === 1){
         displayText += words+"ay ";
@@ -66,7 +70,7 @@ var splitSentence = function(input){
       }
       else if (yArray.some(checkChar)) {
         displayText += words+"ay ";
-      };
+      }
     }
   }
 }
@@ -76,5 +80,5 @@ $("form#pigLatin").submit(function(event) {
   event.preventDefault();
   inputPhrase = $("#sentence").val();
   splitSentence(inputPhrase);
-  $("#output").append(displayText);
+  $("#output").text(displayText);
 });
